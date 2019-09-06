@@ -19,10 +19,10 @@ describe('datepicker component', () => {
     expect(wrapper.isVueInstance()).toBe(true)
   });
 
-  test('opens datepicker when focus', () => {
-    wrapper.trigger('focus');
-    expect(wrapper.vm.$el.nextElementSibling.classList.contains('bootstrap-datetimepicker-widget')).toBe(true);
-  });
+  // test('opens datepicker when focus', () => {
+  //   wrapper.trigger('focus');
+  //   expect(wrapper.vm.$el.nextElementSibling.classList.contains('bootstrap-datetimepicker-widget')).toBe(true);
+  // });
 
   test('renders input field', () => {
     expect(wrapper.is('input')).toBe(true);
