@@ -10,24 +10,24 @@ describe('datepicker watchers', () => {
   beforeEach(() => {
     wrapper = mount(Component, {
       propsData: {
-        value: null,
+        modelValue: null,
         config: {}
       }
     });
   });
 
   afterEach(() => {
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
-  test('updates value runtime', () => {
+  test('updates value runtime', async () => {
     let date = moment();
-    wrapper.setProps({value: date});
+    await wrapper.setProps({modelValue: date});
     expect(wrapper.vm.dp.date()).toEqual(date);
   });
 
-  test('updates configs runtime', () => {
-    wrapper.setProps({
+  test('updates configs runtime', async () => {
+    await wrapper.setProps({
       config: {
         showTodayButton: true
       }

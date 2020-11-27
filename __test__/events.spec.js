@@ -1,9 +1,8 @@
 import component from '../src/component.vue';
-import {mount, createLocalVue} from '@vue/test-utils';
+import {mount} from '@vue/test-utils';
 
 describe('datepicker component events', () => {
 
-  let localVue = createLocalVue();
   let onChangeStub = jest.fn();
 
   test('emits events', (done) => {
@@ -27,9 +26,7 @@ describe('datepicker component events', () => {
       }
     };
 
-    let wrapper = mount(app, {
-      localVue
-    });
+    let wrapper = mount(app);
 
     wrapper.setData({date: '11/11/2018'});
 

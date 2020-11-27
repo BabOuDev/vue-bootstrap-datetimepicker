@@ -7,7 +7,7 @@ describe('datepicker props', () => {
 
   // Store for future usage
   const props = {
-    value: '10/11/2017',
+    modelValue: '10/11/2017',
     config: {
       format: 'DD/MM/YYYY'
     }
@@ -22,7 +22,7 @@ describe('datepicker props', () => {
   });
 
   afterEach(() => {
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   test('accepts config via prop', () => {
@@ -32,11 +32,11 @@ describe('datepicker props', () => {
   });
 
   test('accepts value via prop', () => {
-    expect(wrapper.props('value')).toBe(props.value);
+    expect(wrapper.props('modelValue')).toBe(props.modelValue);
   });
 
   test('validates v-model', () => {
-    let vModel = wrapper.vm.$options.props.value;
+    let vModel = wrapper.vm.$options.props.modelValue;
 
     expect(vModel.validator(false)).toBe(false);
     expect(vModel.validator(undefined)).toBe(false);

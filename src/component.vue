@@ -15,7 +15,7 @@
   export default {
     name: 'date-picker',
     props: {
-      value: {
+      modelValue: {
         default: null,
         required: true,
         validator(value) {
@@ -54,7 +54,7 @@
       // Store data control
       this.dp = this.elem.data('DateTimePicker');
       // Set initial value
-      this.dp.date(this.value);
+      this.dp.date(this.modelValue);
       // Watch for changes
       this.elem.on('dp.change', this.onChange);
       // Register remaining events
@@ -66,7 +66,7 @@
        *
        * @param newValue
        */
-      value(newValue) {
+      modelValue(newValue) {
         this.dp && this.dp.date(newValue || null)
       },
 
@@ -82,6 +82,7 @@
         }
       }
     },
+    emits: ['update:modelValue', 'dp-show', 'dp-change', 'dp-hide', 'dp-update', 'dp-error'],
     methods: {
       /**
        * Update v-model upon change triggered by date-picker itself
@@ -90,7 +91,7 @@
        */
       onChange(event) {
         let formattedDate = event.date ? event.date.format(this.dp.format()) : null;
-        this.$emit('input', formattedDate);
+        this.$emit('update:modelValue', formattedDate);
       },
 
       /**
@@ -107,7 +108,7 @@
     /**
      * Free up memory
      */
-    beforeDestroy() {
+    beforeUnmount() {
       /* istanbul ignore else */
       if (this.dp) {
         this.dp.destroy();

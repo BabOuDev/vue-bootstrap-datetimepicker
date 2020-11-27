@@ -10,13 +10,13 @@ describe('datepicker component', () => {
     wrapper = mount(Component, {
       attachToDocument: true,
       propsData: {
-        value: new Date()
+        modelValue: new Date()
       }
     });
   });
 
   test('is a Vue instance', () => {
-    expect(wrapper.isVueInstance()).toBe(true)
+    expect(wrapper.vm).toBeTruthy();
   });
 
   // test('opens datepicker when focus', () => {
@@ -25,12 +25,11 @@ describe('datepicker component', () => {
   // });
 
   test('renders input field', () => {
-    expect(wrapper.is('input')).toBe(true);
+    expect(wrapper.element.nodeName.toLowerCase()).toBe('input');
   });
 
-  test('clean up on destroy', () => {
-    wrapper.destroy();
-    expect(wrapper.isEmpty()).toBe(true);
+  test('clean up on unmount', () => {
+    wrapper.unmount();
     expect(wrapper.vm.dp).toBe(null);
   });
 

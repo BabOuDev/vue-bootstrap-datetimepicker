@@ -1,10 +1,7 @@
 import Component from '../src/index';
-import {mount, createLocalVue} from '@vue/test-utils';
+import {mount} from '@vue/test-utils';
 
 describe('datepicker global component', () => {
-
-  let localVue = createLocalVue();
-  localVue.use(Component, 'date-picker');
 
   test('works as plugin', () => {
 
@@ -19,17 +16,14 @@ describe('datepicker global component', () => {
             format: 'DD/MM/YYYY'
           }
         }
-      }
+      },
+      components: {'date-picker': Component}
     };
 
-    let wrapper = mount(app, {
-      localVue
-    });
+    let wrapper = mount(app);
 
-    expect(wrapper.contains(Component)).toBe(true);
-
-    let input = wrapper.find(Component);
-    expect(input.is('input')).toBe(true);
+    let input = wrapper.findComponent(Component);
+    expect(input.element.nodeName.toLowerCase()).toBe('input');
     expect(input.vm.$el.value).toBe('10/10/2017');
     expect(input.classes()).toContain('date-picker');
     expect(input.attributes('name')).toEqual('date');
